@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Display</title>
+</head>
+<body>
+    <h1>Scores</h1>
+    <p>
+    Team 1: <span id="team1Text"></span> <span id="team1Number"></span> <span id="team1Modifier" style="display: none;"></span>
+    <br>
+    Team 2: <span id="team2Text"></span> <span id="team2Number"></span> <span id="team2Modifier" style="display: none;"></span>
+    </p>
+
+    <p>Countdown: <span id="countdownDisplay">0:00</span></p>
+
+    <script>
+        // Connect to websocket on port 8090 local ip
+        var ws = new WebSocket('ws://192.168.1.237:8090');
+
+        ws.onopen = function() {
+            console.log('Connected to the WebSocket server');
+        };
+        
+        // Error processing
+        ws.onmessage = function(event) {
+            if (event.data instanceof Blob) {
+                // The data is a Blob, read it as text
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var data = JSON.parse(reader.result); // Parse the read string as JSON
+                    updateScores(data);
+                };
+                reader.readAsText(event.data);
+            } else {
+                // The data is a JSON string
+                var data = JSON.parse(event.data); // Directly parse the string as JSON
+                updateScores(data);
+            }
+        };
+
+        // Update stored info
+        function updateScores(data) {
+            document.getElementById('team1Text').textContent = data.team1Text || '';
+            document.getElementById('team1Number').textContent = data.team1Number || '';
+            updateModifierDisplay('team1Modifier', data.team1Modifier);
+            document.getElementById('team2Text').textContent = data.team2Text || '';
+            document.getElementById('team2Number').textContent = data.team2Number || '';
+            updateModifierDisplay('team2Modifier', data.team2Modifier);
+            if (data.countdown !== undefined) {
+                document.getElementById('countdownDisplay').textContent = data.countdown;
+            }
+        }
+
+        function updateModifierDisplay(modifierId, value) {
+            var modifierElement = document.getElementById(modifierId);
+            if (value > 0) {
+                modifierElement.textContent = value;
+                modifierElement.style.display = 'inline';
+            } else {
+                modifierElement.style.display = 'none';
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

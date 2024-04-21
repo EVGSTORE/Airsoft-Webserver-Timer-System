@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Score Input</title>
+
+</head>
+<body>
+    <h1>Input Scores</h1>
+
+    <!-- Team 1 -->
+    <input id="team1Text" type="text" placeholder="Team 1 Name" oninput="sendData()">
+    <input id="team1Number" type="number" placeholder="Team 1 Score" oninput="sendData()">
+    <input id="team1Modifier" type="number" placeholder="Team 1 Modifier" oninput="resetOther(1)">
+
+    <!-- Team 2 -->
+    <br>
+    <input id="team2Text" type="text" placeholder="Team 2 Name" oninput="sendData()">
+    <input id="team2Number" type="number" placeholder="Team 2 Score" oninput="sendData()">
+    <input id="team2Modifier" type="number" placeholder="Team 2 Modifier" oninput="resetOther(2)">
+
+    
+    <br><hr>
+    <!-- Countdown-->
+    <h1>Countdown</h1>
+    <p>Minutes: <input id="customMinutes" type="number" placeholder="Minutes" oninput="updateCustomTime()"></p>
+    <p>Seconds: <input id="customSeconds" type="number" placeholder="Seconds" oninput="updateCustomTime()"></p>
+
+    <p>Live watch: <span id="countdownDisplay">00:00</span></p>
+    <button onclick="startCountdown()">Start Countdown</button>
+    <button onclick="toggleCountdown()">Pause/Resume</button>
+    <button onclick="resetCountdown()">Reset</button>
+
+    <!-- Scripting -->
+    <script>
+        function setCustomTime() {
+            countdownNumber = getCustomTime();
+            updateDisplay(countdownNumber); // Update the display with the new time
+        }
+    </script>
+    <script src="JS/countdownclock.js"></script>
+    <script src="JS/teamscores.js"></script>
+
+</body>
+</html>
