@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+  <link rel="stylesheet" href="CSS/scoreboardcss.css">
+  <title> TV Scoreboard </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="flex-container">
+  <div id="break"></div>
+  <div id="break"></div>
+
+  <div id="1TeamTry" class="heightsmL left hide">T1</div>
+  <div id="1TeamName" class="heightmd leftc">AAA</div>
+  <div id="1TeamScore" class="heightlr centerl">000</div>
+  <div id="2TeamScore" class="heightlr centerr">000</div>
+  <div id="2TeamName" class="heightmd rightc">BBB</div>
+  <div id="2TeamTry" class="heightsmR right hide">T2</div>
+
+  <div id="3TeamTry" class="heightsmL left hide">T3</div>
+  <div id="3TeamName" class="heightmd leftc">CCC</div>
+  <div id="3TeamScore" class="heightlr centerl">000</div>
+  <div id="4TeamScore" class="heightlr centerr">000</div>
+  <div id="4TeamName" class="heightmd rightc">DDD</div>
+  <div id="4TeamTry" class="heightsmR right hide">T4</div>
+
+  <div id="break"></div>
+  <div id="break"></div>
+</div>
+
+<!-- SCRIPTING -->
+<script>
+
+// Connect to local websocket
+var ws = new WebSocket('ws://192.168.1.237:8090');
+ws.onopen = function() {
+    console.log('Connected to the WebSocket server');
+};
+
+// Websocket Error processing
+ws.onmessage = function(event) {
+    if (event.data instanceof Blob) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var data = JSON.parse(reader.result);
+            updateScores(data);
+        };
+        reader.readAsText(event.data);
+    } else {
+        var data = JSON.parse(event.data);
+        updateScores(data);
+    }
+};
+
+// Scoreboard Updating
+function updateScores(data) {
+  document.getElementById('1TeamName').textContent = data.team1Text || '';
+  document.getElementById('1TeamScore').textContent = data.team1Number || '';
+  document.getElementById('1TeamTry').textContent = data.team1Modifier || '';
+
+  document.getElementById('2TeamName').textContent = data.team2Text || '';
+  document.getElementById('2TeamScore').textContent = data.team2Number || '';
+  document.getElementById('2TeamTry').textContent = data.team2Modifier || '';
+
+  document.getElementById('3TeamName').textContent = data.team3Text || '';
+  document.getElementById('3TeamScore').textContent = data.team3Number || '';
+  document.getElementById('3TeamTry').textContent = data.team3Modifier || '';
+  
+  document.getElementById('4TeamName').textContent = data.team4Text || '';
+  document.getElementById('4TeamScore').textContent = data.team4Number || '';
+  document.getElementById('4TeamTry').textContent = data.team4Modifier || '';
+
+  updateTeamNumbers(data);
+}
+
+function updateTeamNumbers(data) {
+  // Assuming the data object has properties team1Number, team2Number, etc.
+  const teamNumbers = {
+    '1TeamTry': data.team1Modifier,
+    '2TeamTry': data.team2Modifier,
+    '3TeamTry': data.team3Modifier,
+    '4TeamTry': data.team4Modifier
+  };
+
+  Object.entries(teamNumbers).forEach(([id, number]) => {
+    const element = document.getElementById(id);
+    if (number < 1) {
+      element.classList.add('hide');
+    } else {
+      element.classList.remove('hide');
+      element.textContent = 'T' + number;
+    }
+  });
+}
+</script>
+</body>
+</html>
+
+

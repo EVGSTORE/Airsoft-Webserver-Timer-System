@@ -1,0 +1,58 @@
+<style>
+
+.flex-container {
+  display: flex;
+}
+
+.flex-item {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 2px;
+}
+
+.flex-item-grow {
+  flex-grow: 1;
+}
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add specific styles for each item if needed */
+#AAA, #BBB, #CCC, #DDD {
+  border-color: blue;
+}
+
+#a0, #b0, #c0, #d0 {
+  border-color: green;
+}
+
+#000a, #000b, #000c, #000d {
+  border-color: purple;
+}
+
+
+</style>
+
+<div class="flex-container">
+    <div class="flex-item" id="a0">a0</div>
+    <div class="flex-item flex-item-grow" id="AAA">AAA</div>
+    <div class="flex-item flex-container-column">
+      <div class="flex-item" id="000a">000</div>
+      <div class="flex-item" id="000b">000</div>
+    </div>
+    <div class="flex-item flex-item-grow" id="BBB">BBB</div>
+    <div class="flex-item" id="b0">b0</div>
+  </div>
+  <div class="flex-container">
+    <div class="flex-item" id="c0">c0</div>
+    <div class="flex-item flex-item-grow" id="CCC">CCC</div>
+    <div class="flex-item flex-container-column">
+      <div class="flex-item" id="000c">000</div>
+      <div class="flex-item" id="000d">000</div>
+    </div>
+    <div class="flex-item flex-item-grow" id="DDD">DDD</div>
+    <div class="flex-item" id="d0">d0</div>
+  </div>
+  

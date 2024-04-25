@@ -10,16 +10,32 @@
     <h1>Input Scores</h1>
 
     <!-- Team 1 -->
-    <input id="team1Text" type="text" placeholder="Team 1 Name" oninput="sendData()">
-    <input id="team1Number" type="number" placeholder="Team 1 Score" oninput="sendData()">
-    <input id="team1Modifier" type="number" placeholder="Team 1 Modifier" oninput="resetOther(1)">
+    <input id="team1Text" type="text" placeholder="Team 1 Name">
+    <input id="team1Number" type="number" placeholder="Team 1 Score">
+    <input id="team1Modifier" type="number" placeholder="Team 1 Modifier" oninput="resetOther(1)" min="0">
 
     <!-- Team 2 -->
     <br>
-    <input id="team2Text" type="text" placeholder="Team 2 Name" oninput="sendData()">
-    <input id="team2Number" type="number" placeholder="Team 2 Score" oninput="sendData()">
-    <input id="team2Modifier" type="number" placeholder="Team 2 Modifier" oninput="resetOther(2)">
+    <input id="team2Text" type="text" placeholder="Team 2 Name">
+    <input id="team2Number" type="number" placeholder="Team 2 Score">
+    <input id="team2Modifier" type="number" placeholder="Team 2 Modifier" oninput="resetOther(2)" min="0">
 
+    <!-- Team 3 -->
+    <br>
+    <input id="team3Text" type="text" placeholder="Team 3 Name">
+    <input id="team3Number" type="number" placeholder="Team 3 Score">
+    <input id="team3Modifier" type="number" placeholder="Team 3 Modifier" oninput="resetOther(3)" min="0">
+
+    <!-- Team 4 -->
+    <br>
+    <input id="team4Text" type="text" placeholder="Team 4 Name">
+    <input id="team4Number" type="number" placeholder="Team 4 Score">
+    <input id="team4Modifier" type="number" placeholder="Team 4 Modifier" oninput="resetOther(4)" min="0">
+
+
+    <button id="sendButton" onclick="sendData()">Send Data</button>
+    <label for="autoSend">Auto Send Data:</label>
+    <input type="checkbox" id="autoSend" onchange="toggleAutoSend()">
     
     <br><hr>
     <!-- Countdown-->
@@ -33,12 +49,12 @@
     <button onclick="resetCountdown()">Reset</button>
 
     <!-- Scripting -->
-    <script>
+    <!-- <script>
         function setCustomTime() {
             countdownNumber = getCustomTime();
             updateDisplay(countdownNumber); // Update the display with the new time
         }
-    </script>
+    </script> -->
     <script src="JS/countdownclock.js"></script>
     <script src="JS/teamscores.js"></script>
 
