@@ -39,54 +39,98 @@
         .NemesisGrant {
             font-family: "NemesisGrantLocal";
         }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <p id="countdownDisplay" class="center score NemesisGrant">NaN</p>
+    <p id="countdownDisplay" class="center score NemesisGrant">NaN</p><br>
+    <p id="advert" class=""></p>
 
     <script>
-        // Connect to websocket on port 8090 local ip
-        var ws = new WebSocket('ws://192.168.1.237:8090');
-
-        ws.onopen = function() {
-            console.log('Connected to the WebSocket server');
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Connect to websocket on port 8091 local ip
+            var ws1 = new WebSocket('ws://192.168.50.205:8091');
+            var lastCountdown = null;
+            var checkTimeout = null;
         
-        // Error processing
-        ws.onmessage = function(event) {
-            if (event.data instanceof Blob) {
-                // The data is a Blob, read it as text
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var data = JSON.parse(reader.result); // Parse the read string as JSON
-                    updateScores(data);
-                };
-                reader.readAsText(event.data);
-            } else {
-                // The data is a JSON string
-                var data = JSON.parse(event.data); // Directly parse the string as JSON
-                updateScores(data);
-            }
-        };
-
-        // Update stored info
-        function updateScores(data) {
-            if (data.countdown !== undefined) {
-                document.getElementById('countdownDisplay').textContent = data.countdown;
-            }
-        }
-
-        function updateModifierDisplay(modifierId, value) {
-            var modifierElement = document.getElementById(modifierId);
-            if (value > 0) {
-                modifierElement.textContent = value;
-                modifierElement.style.display = 'inline';
-            } else {
-                modifierElement.style.display = 'none';
-            }
-        }
-
+            ws1.onopen = function() {
+                console.log('Connected to the WebSocket server');
+            };
         
-    </script>
+            ws1.onmessage = function(event) {
+                console.log("Received data:", event.data); // Log any data received from the WebSocket
+        
+                if (event.data instanceof Blob) {
+                    // The data is a Blob, read it as text
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        try {
+                            var data = JSON.parse(reader.result); // Parse the read string as JSON
+                            console.log("Parsed data from Blob:", data); // Debugging the parsed data
+                            updateScores(data);
+                        } catch (e) {
+                            console.error("Error parsing JSON from Blob:", e);
+                        }
+                    };
+                    reader.readAsText(event.data);
+                } else {
+                    try {
+                        // The data is a JSON string
+                        var data = JSON.parse(event.data); // Directly parse the string as JSON
+                        console.log("Parsed JSON string data:", data); // Debugging the parsed data
+                        updateScores(data);
+                    } catch (e) {
+                        console.error("Error parsing JSON string:", e);
+                    }
+                }
+            };
+        
+            ws1.onerror = function(event) {
+                console.error('WebSocket error:', event);
+            };
+        
+            ws1.onclose = function(event) {
+                console.log('WebSocket connection closed:', event.reason);
+            };
+        
+            // Update stored info
+            function updateScores(data) {
+                if (data.countdown !== undefined) {
+                    document.getElementById('countdownDisplay').textContent = data.countdown;
+                    var element = document.getElementById("advert");
+        
+                    if (element) {
+                        if (data.countdown === lastCountdown && !checkTimeout) {
+                            checkTimeout = setTimeout(function() {
+                                console.log("NOCHANGE;4");
+                                element.classList.remove("hide");
+                                clearTimeout(checkTimeout);
+                                checkTimeout = null; // Reset the timeout variable
+                            }, 4000);
+                        } else if (data.countdown !== lastCountdown) {
+                            if (checkTimeout) {
+                                clearTimeout(checkTimeout);
+                                checkTimeout = null;
+                                element.classList.add("hide");
+                            }
+                            lastCountdown = data.countdown;
+                            checkTimeout = setTimeout(function() {
+                                element.classList.add("hide");
+                                clearTimeout(checkTimeout);
+                                checkTimeout = null; // Reset the timeout variable
+                            }, 4000);
+                        }
+                    } else {
+                        console.error("Element with ID 'advert' was not found.");
+                    }
+                }
+            }
+        });
+        </script>
+        
+    
 </body>
 </html>

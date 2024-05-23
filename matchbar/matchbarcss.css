@@ -1,0 +1,147 @@
+
+  @font-face {
+    font-family: "NemesisGrantLocal";
+    src: url("../CSS/NemesisGrant.ttf");
+  }
+
+  @font-face {
+    font-family: "EurostileLocal";
+    src: url("../CSS/Eurostile.ttf");
+  }
+
+.score-grid {
+    display: grid; 
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    height: 130px;
+    width: 715px;
+ }
+ 
+ .score-grid > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+ }
+   
+ #item-0 {
+    /* background-color: #7BBBC8; */
+    height: 130px;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-row-end: 3;
+    grid-column-end: 3;
+ }
+ 
+ #item-1 {
+    grid-row-start: 1;
+    grid-column-start: 3;
+    grid-row-end: 3;
+    grid-column-end: 6;
+ }
+ 
+ #item-2 {
+    grid-row-start: 1;
+    grid-column-start: 6;
+    grid-row-end: 2;
+    grid-column-end: 8;
+ }
+ 
+ #item-3 {
+    grid-row-start: 2;
+    grid-column-start: 6;
+    grid-row-end: 3;
+    grid-column-end: 8;
+ }
+ 
+ #item-4 {
+    grid-row-start: 2;
+    grid-column-start: 8;
+    grid-row-end: 3;
+    grid-column-end: 10;
+ }
+ 
+ #item-5 {
+    grid-row-start: 1;
+    grid-column-start: 8;
+    grid-row-end: 2;
+    grid-column-end: 10;
+ }
+ 
+ #item-6 {
+    background-color: #a8763d6a; 
+    grid-row-start: 2;
+    grid-column-start: 10;
+    grid-row-end: 3;
+    grid-column-end: 11;
+    border-radius: 100px / 25px;
+ }
+ 
+ #item-7 {
+    background-color: #a8763d6a; 
+    grid-row-start: 1;
+    grid-column-start: 10;
+    grid-row-end: 2;
+    grid-column-end: 11;
+    border-radius: 100px / 25px;
+ }
+ 
+ p {
+    font-size: 250%;
+    font-family: "NemesisGrantLocal";
+ }
+
+ .clock {
+    font-size: 380%;
+    font-family: "EurostileLocal";
+ }
+
+.logoimg {
+   width: 100%;
+   height: 100%;
+}
+
+.hide {
+   opacity: 0;
+}
+
+.hidden {
+   opacity: 0;
+   transition: opacity 0.2s ease;
+}
+
+.visible {
+   opacity: 1;
+   transition: opacity 0.2s ease;
+}
+
+body {
+   /*background-color: #8f9170;*/
+   background: none;
+   color: white;
+   background-image: url("../../../IMG_4987.jpg");
+   transform: scale(1.1);
+   transform-origin: left top;
+}
+
+.cornercut {
+   background: rgb(93,93,93);
+   background: linear-gradient(45deg, rgba(93,93,93,0) 10%, rgba(93,93,93,0.63) 10%, rgba(93,93,93,0.63) 90%, rgba(93,93,93,0) 90%);
+}
+
+.cornercutclock {
+   background: rgb(93,93,93);
+   background: linear-gradient(-45deg, rgba(93,93,93,0) 10%, rgba(93,93,93,0.53) 10%, rgba(93,93,93,0.53) 90%, rgba(93,93,93,0) 90%);
+}
+
+.e {
+   background-color: #5d5d5d27;
+}
+
+.circlecutlogo {
+
+   background: rgb(0,0,0);
+   background: radial-gradient(circle, rgba(0,0,0,0.7553615196078431) 67%, rgba(93,93,93,0) 67%);
+ }

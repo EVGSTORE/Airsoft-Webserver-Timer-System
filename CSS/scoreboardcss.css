@@ -36,8 +36,8 @@
   
   .heightlr {
     line-height: calc(80px * var(--scale));
-    width: calc(90px * var(--scale));
-    font-size: calc(300% * var(--scale));
+    width: calc(100px * var(--scale));
+    font-size: calc(350% * var(--scale));
   }
   
   #break {
@@ -88,9 +88,14 @@
   /* Fonts */
   * {
     font-family: "NemesisGrantLocal";
+    overflow: hidden;
   }
   @font-face {
     font-family: "NemesisGrantLocal";
     src: url("NemesisGrant.ttf");
   }
 
+  @font-face {
+    font-family: "EurostileLocal";
+    src: url("Eurostile.ttf");
+  }

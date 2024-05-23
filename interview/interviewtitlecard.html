@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Boxes with Logo and Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: "NemesisGrantLocal";
+            src: url("../CSS/NemesisGrant.ttf"); /* Ensure correct path */
+        }
+
+        @font-face {
+            font-family: "EurostileLocal";
+            src: url("../CSS/Eurostile.ttf"); /* Ensure correct path */
+        }
+
+        @keyframes fadeInSlideRight1 {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInSlideRight2 {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(150px); opacity: 1; }
+        }
+
+        .scorerotate {
+            height: 130px;
+            position: absolute;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .logo {
+            height: 130px;
+            background: radial-gradient(circle, rgba(0,0,0,0.7553615196078431) 67%, rgba(93,93,93,0) 67%);
+        }
+
+        .logobox {
+            width: 150px;
+        }
+
+        .contentbox {
+            margin-top: 15px;
+            width: 500px;
+            height: 90px;
+            background: rgb(245,245,245);
+            background: linear-gradient(137deg, rgba(245,245,245,0) 7%, rgba(0,0,0,0.5732668067226891) 7%, rgba(0,0,0,0.5732668067226891) 93%, rgba(245,245,245,0) 93%);
+        }
+
+        .centervert {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #divscore1 {
+            animation: fadeInSlideRight1 1s forwards;
+        }
+
+        #divscore2 {
+            animation: fadeInSlideRight2 1.5s forwards;
+        }
+
+        body {
+            transform: scale(1.1);
+            transform-origin: left top;
+        }
+    </style>
+</head>
+<body>
+    <div id="rotate1" style="display:block;">
+        <div class="scorerotate logobox" id="divscore1">
+            <img src="../media/eagoatnobghr.png" class="logo" alt="Static Logo">
+        </div>
+        <div class="scorerotate contentbox centervert" id="divscore2">
+            <span style="font-family: 'NemesisGrantLocal', sans-serif; font-size: 170%; color:#ffffff">View upcoming events at: <span style="font-family: EurostileLocal; text-align: left; color:#79c043"> EXTREMEAIRSOFTRI.COM</span>
+        </div>
+    </div>
+
+    <div id="rotate2" style="display:none;">
+        <div class="scorerotate logobox" id="divscore1">
+            <img src="../media/eagoatnobghr.png" class="logo" alt="Static Logo">
+        </div>
+        <div class="scorerotate contentbox centervert" id="divscore2">
+            <span style="font-family: 'NemesisGrantLocal', sans-serif; font-size: 200%; color:#ffffff" id="guestNameOne">Extreme Airsoft • Live</span>
+        </div>
+    </div>
+
+    <script>
+        var socket = new WebSocket('ws://192.168.50.205:8092');
+        socket.onmessage = function(event) {
+            // Check if the data is in Blob format
+            if (event.data instanceof Blob) {
+                // Use Blob.text() to convert it to text
+                event.data.text().then(function(text) {
+                    document.getElementById('guestNameOne').innerHTML = text; // Update the display with the text
+                });
+            } else {
+                // If it's not a Blob, assume it's already text
+                document.getElementById('guestNameOne').innerHTML = event.data;
+            }
+        };
+
+        function rotateContent() {
+            var rotate1 = $('#rotate1');
+            var rotate2 = $('#rotate2');
+            if (rotate1.is(':visible')) {
+                rotate1.hide();
+                rotate2.show();
+            } else {
+                rotate2.hide();
+                rotate1.show();
+            }
+            setTimeout(rotateContent, 8000); // Change every 5 seconds
+        }
+
+        $(document).ready(function() {
+            setTimeout(rotateContent, 50); // Start rotation when document is ready
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Guest Selector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(109.6deg, rgb(36, 45, 57) 0%, rgb(24, 41, 58) 50%, rgb(16, 37, 60) 100%);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+        }
+
+        button, input {
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        button {
+            background-color: rgba(240, 200, 200, 0.801);
+            cursor: pointer;
+        }
+
+        input {
+            background-color: rgba(255, 255, 255, 0.801);
+        }
+
+        .current-guest {
+            margin-top: 20px;
+            font-size: 18px;
+            color: white;
+        }
+
+        .logo {
+            height: 130px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.185) 67%, rgba(93,93,93,0) 67%);
+        }
+    </style>
+</head>
+<body>   
+
+    <p  class="current-guest">Extreme Airsoft Guest Selector</p>
+    <div class="logobox">
+    <img src="../media/eagoatnobghr.png" class="logo" alt="Static Logo">
+    </div>
+    
+    <p id="currentGuest" class="current-guest">Current Guest: None</p>
+
+    <input id="GuestInputOne" type="text" placeholder="Enter Guest 1 Name">
+    <input id="GuestInputTwo" type="text" placeholder="Enter Guest 2 Name">
+    <input id="GuestInputThree" type="text" placeholder="Enter Guest 3 Name">
+    <button onclick="rotateGuests();" id="counterDisplay">Rotate Names</button>
+    
+
+    <script>
+        var socket = new WebSocket('ws://192.168.50.205:8092');
+        var index = 0;
+        var guests = [];
+        var counter = 0;
+
+        function rotateGuests() {
+            guests = [
+                document.getElementById('GuestInputOne').value || "Extreme Airsoft • Live",
+                document.getElementById('GuestInputTwo').value || "Extreme Airsoft • Live",
+                document.getElementById('GuestInputThree').value || "Extreme Airsoft • Live"
+            ];
+            document.getElementById('currentGuest').textContent = 'Current Guest: ' + (guests[index] || "Extreme Airsoft • Live");
+            socket.send(guests[index]);
+            index = (index + 1) % guests.length; // Cycle through guests
+        }
+
+        socket.onmessage = function(event) {
+            console.log('Data received: ', event.data);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+body {
+    background: white;
+    color: black;
+    background: linear-gradient(109.6deg, rgb(217, 228, 241) 0%, rgb(199, 216, 233) 50%, rgb(175, 196, 219) 100%);
+}
+
+h1 {
+    font-family: "NemesisGrantLocal";
+}
+
+input {
+    text-align: center;
+    font-family: "EurostileLocal";
+    font-size: 110%;
+}
+
+h2 {
+    display: inline-block;
+    margin: none;
+    line-height: 10px;
+    font-family: "EurostileLocal";
+}
+
+p {
+    font-family: "EurostileLocal";
+}
+
+.cutCorner::placeholder{
+    color: rgba(0, 0, 0, 0.658);
+    text-align: center;
+    font-size: 90%;
+}
+
+.inputyellow::placeholder{
+    color: rgba(0, 0, 0, 0.658);
+    text-align: center;
+    font-size: 90%;
+}
+
+.cutCorner {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    color: white;
+    background: rgb(93,93,93);
+    background: linear-gradient(45deg, rgba(93,93,93,0) 10%, rgba(93,93,93,0.63) 10%, rgba(93,93,93,0.63) 90%, rgba(93,93,93,0) 90%);
+    width: 130px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 2px;
+}
+
+.inputwhite2 {
+
+}
+
+.inputyellow {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    color: black;
+    font-size: 100%;
+    background: rgb(255,255,255);
+    background: linear-gradient(152deg, rgba(255,255,255,0) 15%, rgba(237,193,74,0.6) 15%, rgba(237,193,74,0.6) 85%, rgba(255,255,255,0) 85%);
+    width: 110px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 2px;
+}
+
+.buttongreen {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    color: black;
+    background: rgb(255,255,255);
+    background: linear-gradient(152deg, rgba(255,255,255,0) 15%, rgba(150,250,147,0.8) 15%, rgba(150,225,147,0.8) 85%, rgba(255,255,255,0) 85%);
+    width: 100px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 2px;
+}
+
+.buttonorange {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    color: black;
+    background: rgb(255,255,255);
+    background: linear-gradient(152deg, rgba(255,255,255,0) 15%, rgba(250,216,147,0.8) 15%, rgba(250,216,147,0.8) 85%, rgba(255,255,255,0) 85%);
+    width: 110px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 2px;
+}
+
+.dataButton:hover {
+    border: none !important;
+    background: rgb(255,255,255) !important;
+    background: linear-gradient(152deg, rgba(255,255,255,0) 15%, rgba(225,150,147,0.7) 15%, rgba(225,150,147,0.7) 85%, rgba(255,255,255,0) 85%) !important;
+}
+
+.dataButton:active {
+    border: none !important;
+    background: rgb(255,255,255) !important;
+    background: linear-gradient(152deg, rgba(255,255,255,0) 15%, rgba(225,150,147,1) 15%, rgba(225,150,147,1) 85%, rgba(255,255,255,0) 85%) !important;
+}
+
+.dataButton {
+    font-size: 105%;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #f9dcdc;
+    color: #cf5e52c7;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 14px;
+    width: 200px;
+}
+
+.dataButton:hover:disabled + .tooltip {
+    display: block;
+}
+
+
+button {
+    font-family: "EurostileLocal";
+}
+
+label {
+    font-family: "EurostileLocal";
+}
+
+.inputswitchbg {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    color: black;
+    background: rgb(255,255,255);
+    background: linear-gradient(-152deg, rgba(255,255,255,0) 12%, rgba(177, 177, 177, 0.8) 12%, rgba(177, 177, 177, 0.8) 88%, rgba(255,255,255,0) 88%);
+    width: 180px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 2px 
+}
+
+.groupgreen {
+    color: black;
+    background: rgb(245,245,245);
+    background: linear-gradient(135deg, rgba(245,245,245,0) 7%, rgba(128,166,108,0.9) 7%, rgba(128,166,108,0.9) 93%, rgba(245,245,245,0) 93%);
+}
+
+.groupblond {
+    color: black;
+    background: rgb(245,245,245);
+    background: linear-gradient(135deg, rgba(245,245,245,0) 7%, rgba(242,242,197,0.9) 7%, rgba(242,242,197,0.9) 93%, rgba(245,245,245,0) 93%);
+}
+
+.grouporange {
+    color: black;
+    background: rgb(245,245,245);
+    background: linear-gradient(135deg, rgba(245,245,245,0) 7%, rgba(242,169,80,0.9) 7%, rgba(242,169,80,0.9) 93%, rgba(245,245,245,0) 93%);
+}
+
+.groupred {
+    color: black;
+    background: rgb(245,245,245);
+    background: linear-gradient(135deg, rgba(245,245,245,0) 7%, rgba(221,103,97,0.9) 7%, rgba(221,103,97,0.9) 93%, rgba(245,245,245,0) 93%);
+}
+
+.countdowndiv {
+    scale: 1.3;
+}
+
+.countdownbutton {
+    border: none;
+    padding: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    background: rgba(168, 168, 168, 0.5) !important;
+}
+
+.countdownbutton:hover {
+    border: none;
+    background: rgba(168, 168, 168, 0.7) !important;
+}
+
+.countdownbutton:active {
+    border: none;
+    background: rgba(168, 168, 168, 0.9) !important;
+}
+
+.scorediv {
+    scale: 1.1;
+}
+
+.matchbardiv {
+    scale: 1.2;
+}
+
+.teamButton {
+    border: none;
+    padding: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 110%;
+}
+
+.teamButton:hover {
+    background: rgba(168, 168, 168, 0.8) !important;
+}
+
+.teamButton:active {
+    background: rgba(168, 168, 168, 1) !important;
+}
+
+/* Buzzers */
+
+.leftbuzzer {
+    border-radius: 50%;
+    padding: 5px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+}
+  /* Fonts */
+  @font-face {
+    font-family: "NemesisGrantLocal";
+    src: url("NemesisGrant.ttf");
+  }
+
+  @font-face {
+    font-family: "EurostileLocal";
+    src: url("Eurostile.ttf");
+  }
+
+  /* Checkbox switch */
+  input[type="checkbox"].switch {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 2em;
+    height: 1em;
+    box-sizing: content-box;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+    vertical-align: middle;
+    margin: auto;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+input[type="checkbox"].switch::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+    background-color: white;
+    transition: left 0.3s;
+}
+
+input[type="checkbox"].switch:checked {
+    background-color: rgba(241, 167, 167, 0.89);
+}
+
+input[type="checkbox"].switch:checked::before {
+    left: 1em;
+}

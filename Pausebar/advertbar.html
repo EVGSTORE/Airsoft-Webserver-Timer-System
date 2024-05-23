@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Cycler</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: darkgray;
+        }
+
+        #container, .flex-container > div, .flex-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .section {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: top 0.5s ease-in-out;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Adjust this if elements are too spread out */
+            width: 100%;
+            height: 100%;
+            margin: 10px 0;
+        }
+
+        .flex-container > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            padding: 10px; /* Reduced padding, adjust as needed */
+            position: relative;
+        }
+
+        .flex-container > div h1, .flex-container > div h3, .flex-container > div h2 {
+            margin: 5px 0; /* Reduced margin, adjust as needed */
+        }
+
+        .flex-container > div:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px; /* Creates spacing at the top */
+            bottom: 10px; /* Creates spacing at the bottom */
+            width: 2px; /* Width of the border */
+            background-color: rgba(52, 52, 52, 0.478); /* Color of the border */
+        }
+
+        .no-border:before {
+            display: none !important;; /* This prevents the pseudo-element from being displayed */
+            background-color: rgba(255, 255, 255, 0) !important;;
+            width: 0px !important; /* Width of the border */
+        }
+
+
+        p {
+            font-family: "NemesisGrantLocal";
+        }
+
+          /* Fonts */
+        @font-face {
+            font-family: "NemesisGrantLocal";
+            src: url("../CSS/NemesisGrant.ttf");
+        }
+
+        @font-face {
+            font-family: "EurostileLocal";
+            src: url("../CSS/Eurostile.ttf");
+        }
+
+        .whitetext {
+            color: white;
+        }
+
+        .wavybackgroundV1 {
+            background-image: url("media/darkstripebackground.png") !important;
+        }
+
+        img {
+            height: 130px;
+            width: 1220px;
+        }
+
+        /* CSL EDITING */
+
+        .CSLlogo {
+            height: 120px !important;
+            width: auto !important;
+        }
+
+        .CSLbackground {
+            background-image: url("media/cslbackground.png") !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ADVERT CONTENT START HERE -->
+    <div id="container">
+
+        <div class="section" id="section1">
+            <img src="media/extremebannerupscaledCSL.png" alt="Banner">
+        </div>
+
+        <div class="section wavybackgroundV1 whitetext" id="section2">
+            <section class="flex-container";>
+                <div>
+                    <h3 style="font-family: NemesisGrantLocal; text-align: left;">View upcomming events:</h3>
+                    <h1 style="font-family: EurostileLocal; text-align: left; color:#79c043">EXTREMEAIRSOFTRI.COM</h1>
+                </div>
+
+                <div>
+                    <h3 style="font-family: NemesisGrantLocal; text-align: left;">Come check us out at:</h3>
+                    <h1 style="font-family: EurostileLocal; text-align: left; color:#79c043">1425 Kingstown Rd, South Kingstown, RI </h1>
+                </div>
+            </section>
+        </div>
+
+        <div class="section" id="section3">
+            <img src="media/revealfirearmsupscaled.png" alt="Banner">
+        </div>
+
+        <div class="section" id="section4">
+            <img src="media/jerrysbannerupscaled.png" alt="Banner">
+        </div>
+
+        <div class="section" id="section5">
+            <img src="media/portaphoneupscaled.png" alt="Banner">
+        </div>
+
+        <!-- START CSL BANNERS -->
+        
+        <div class="section CSLbackground whitetext" id="section6">
+            <section class="flex-container no-border">
+                <div>
+                    <img src="media/CSL+Logo.png" class="CSLlogo">
+                </div>
+                <div>
+                    <h1 style="font-family: NemesisGrantLocal; color:black">Competitive Speedsoft League</h1>
+                    <h1 style="font-family: EurostileLocal; color:#ed2225">CSL-AIRSOFT.COM</h1>
+                </div>
+                <div>
+                    <img src="media/littlerhodey24.png" class="CSLlogo">
+                </div>
+            </section>
+        </div>
+
+
+    </div>
+
+        <!-- ADVERT CONTENT END HERE -->
+        <!-- SCROLL SCRIPTING -->
+    <script>
+        let currentSectionIndex = 0;
+        const sections = document.querySelectorAll('.section');
+        sections[currentSectionIndex].style.top = '0'; // Initially show the first section
+
+        function showNextSection() {
+            const nextSectionIndex = (currentSectionIndex + 1) % sections.length;
+            const currentSection = sections[currentSectionIndex];
+            const nextSection = sections[nextSectionIndex];
+
+            nextSection.style.top = '100%'; // Start the next section from below
+            nextSection.offsetHeight; // Force reflow for transition to take effect
+
+            // Move next section to overlap current
+            nextSection.style.top = '0';
+
+            // Optional: Reset current section to the bottom after a delay
+            setTimeout(() => {
+                currentSection.style.top = '100%';
+            }, 500); // Adjust timing to match the transition
+
+            currentSectionIndex = nextSectionIndex;
+        }
+
+        setInterval(showNextSection, 6000);
+    </script>
+</body>
+</html>

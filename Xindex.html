@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="CSS/maincss.css">
+<link rel="stylesheet" href="Pausebar/responsegrid/responsegrid.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<title>Score Input</title>
+
+</head>
+<body>
+
+    <section class="flex-container">
+        <div>
+            <!-- Inputs for teams -->
+            <div class="scorediv">
+            <h1>Score Control</h1>
+            <h2 class="inline">1ㅤ</h2><input id="team1Text" type="text" placeholder="Team 1 Name" maxlength="4" class="cutCorner groupgreen">
+            <input id="team1Number" type="number" placeholder="Team 1 Score" max="999" class="cutCorner groupgreen">
+            <input id="team1Modifier" type="number" placeholder="Team 1 Try" min="0" class="inputyellow groupgreen">
+
+            <br>
+            <h2 class="inline">2ㅤ</h2><input id="team2Text" type="text" placeholder="Team 2 Name" maxlength="4" class="cutCorner groupblond">
+            <input id="team2Number" type="number" placeholder="Team 2 Score" max="999" class="cutCorner groupblond">
+            <input id="team2Modifier" type="number" placeholder="Team 2 Try" min="0" class="inputyellow groupblond">
+
+            <br>
+            <h2 class="inline">3ㅤ</h2><input id="team3Text" type="text" placeholder="Team 3 Name" maxlength="4" class="cutCorner grouporange">
+            <input id="team3Number" type="number" placeholder="Team 3 Score" max="999" class="cutCorner grouporange">
+            <input id="team3Modifier" type="number" placeholder="Team 3 Try" min="0" class="inputyellow grouporange">
+
+            <br>
+            <h2 class="inline">4ㅤ</h2><input id="team4Text" type="text" placeholder="Team 4 Name" maxlength="4" class="cutCorner groupred">
+            <input id="team4Number" type="number" placeholder="Team 4 Score"  max="999" class="cutCorner groupred">
+            <input id="team4Modifier" type="number" placeholder="Team 4 Try" min="0" class="inputyellow groupred">
+
+            <br><br>
+            <button id="sendButton" class="dataButton buttongreen"><b>Send Data</b></button>
+            <button onclick="clearAllInputs()" class="dataButton buttonorange"><b>Clear Boxes</b></button>
+            <div class="inputswitchbg"><label for="autoSend"><b>Auto Update:</b></label>
+            <input type="checkbox" class="switch" id="autoSend"></div>
+            </div>
+            <br>
+        </div>
+        <div>
+            <!-- Countdown-->
+            <br>
+            <div class="countdowndiv">
+            <h1>Countdown Control</h1>
+            <p>Minutes: <input id="customMinutes" type="number" placeholder="Minutes" min="0" style="border-width: 1px; background: rgba(0, 0, 0, 0.05);"></p>
+            <p>Seconds: <input id="customSeconds" type="number" placeholder="Seconds" min="0" style="border-width: 1px; background: rgba(0, 0, 0, 0.05);"></p>
+
+            <p>Live Countdown: <span id="countdownDisplay"><b>00:00</b></span></p>
+            <button onclick="resetCountdown()" class="countdownbutton"><i class="fa fa-refresh"></i> Restart</button>
+            <button onclick="startCountdown()" class="countdownbutton"><i class="fa fa-play"></i> Start</button>
+            <button onclick="toggleCountdown()" class="countdownbutton"><i class="fa fa-pause"></i> Pause</button>
+            <button onclick="endCountdown()" class="countdownbutton"><i class="fa fa-stop"></i> Stop</button>
+            <br><br>
+            <button onclick="startSoundCountdown()" class="countdownbutton" style="padding: 8px">20 Second Start</button>
+            <button onclick="playSoundEndgame()" class="countdownbutton" style="padding: 8px">Endgame W/ Horn</button>
+        </div>
+        </div>
+    </section>
+
+    <section class="flex-container">
+        <div>
+            <div class="matchbardiv">
+            <!-- Matchbar Display -->
+            <h1 style="line-height: 60%;">Stream Matchbar Control</h1>
+            <h2 id="currentMatchup">Select teams to see the matchup.</h2><br>
+                <!-- Inputs for teams -->
+                <button id="team1Button" class="teamButton" style="background: rgba(128,166,108,0.9)">Team 1</button>
+                <button id="team2Button" class="teamButton" style="background: rgba(242,242,197,0.9)">Team 2</button>
+                <button id="team3Button" class="teamButton" style="background: rgba(242,169,80,0.9)">Team 3</button>
+                <button id="team4Button" class="teamButton" style="background: rgba(221,103,97,0.9);">Team 4</button>        
+            <p style="line-height: 50%;">V.S.</p>
+                <button id="Vteam1Button" class="teamButton" style="background: rgba(128,166,108,0.9)">Team 1</button>
+                <button id="Vteam2Button" class="teamButton" style="background: rgba(242,242,197,0.9)">Team 2</button>
+                <button id="Vteam3Button" class="teamButton" style="background: rgba(242,169,80,0.9)">Team 3</button>
+                <button id="Vteam4Button" class="teamButton" style="background: rgba(221,103,97,0.9);">Team 4</button>    
+            </div>
+            <br>
+        </div>
+        <div>
+            <embed type="text/html" src="Matchbar/matchbarNOADVERT.html" id="advert" class="hidden" width="800" height="190px">
+        </div>
+    </section>
+
+    <section class="flex-container">
+        <div>
+            <button id="holdButton">Root Directory (Hold) <i class="fa fa-toggle-up"></i> </button>
+            <a href="../webserver/audio/playaudio.html" target="_blank"><button>Audio Receiver (New Tab)</button></a>
+            <a href="../webserver/interview/interviewcontroller.html" target="_blank"><button>Interview Controller (New Tab)</button></a>
+            <br><br>
+            <a href="../webserver/countdowntimer.html" target="_blank"><button>TV Score Page</button></a>
+            <a href="../webserver/clock.html" target="_blank"><button>TV Clock Page</button></a>
+        </div>
+        <div>
+            <div class="leftbuzzer" style="background-color: red; width: 60px;">Left <i class="fa fa-bell"></i> </div>
+            <div class="rightbuzzer">Right <i class="fa fa-bell"></i> </div>
+        </div>
+    </section>
+
+    <!-- Scripting -->
+    <!-- <script>
+        function setCustomTime() {
+            countdownNumber = getCustomTime();
+            updateDisplay(countdownNumber); // Update the display with the new time
+        }
+    </script> -->
+    <script src="JS/countdownclock.js"></script>
+    <script src="JS/teamscores.js"></script>
+    <script src="JS/matchbarsend.js"></script>
+    <script src="JS/mainjs.js"></script>
+    <script src="JS/gobackbutton.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function sendAllData() {
+                window.sendDataToPort8090();
+                window.sendDataToPort8093();
+            }
+
+            const sendButton = document.getElementById('sendButton');
+            if (sendButton) {
+                sendButton.addEventListener('click', sendAllData);
+            } else {
+                console.error("Send button not found.");
+            }
+        });
+
+        /* function startSoundCountdown() {
+            var audio = new Audio('audio/20seccountdown.mp3');
+            audio.play();
+            setTimeout(startCountdown, 11000);  // Execute startCountdown after 20000 milliseconds
+        } */
+    </script>
+
+</body>
+</html>

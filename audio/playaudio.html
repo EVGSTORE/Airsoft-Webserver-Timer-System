@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Playback</title>
+    <style>
+        #playButton {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #playButton:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Waiting for audio command...</h1>
+    <button id="playButton">Enable Audio</button>
+
+    <script>
+
+        // Websocket Connections & Debugging
+        var ws = new WebSocket('ws://192.168.50.205:8091');
+        var playButton = document.getElementById('playButton');
+
+        //AUDIO LOCATIONS
+        var countdownAudio = new Audio('20seccountdown.mp3');
+        var endgameAudio = new Audio('endgame.mp3');
+
+        ws.onopen = function() {
+            console.log('WebSocket connection established.');
+        };
+
+        ws.onmessage = function(event) {
+            if (event.data instanceof Blob) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    try {
+                        var data = JSON.parse(reader.result);
+                        processMessage(data);
+                    } catch (error) {
+                        console.error("Error parsing Blob message:", error);
+                    }
+                };
+                reader.onerror = function(err) {
+                    console.error("Error reading the Blob data:", err);
+                };
+                reader.readAsText(event.data);
+            } else {
+                try {
+                    var data = JSON.parse(event.data);
+                    processMessage(data);
+                } catch (error) {
+                    console.error("Error parsing message:", error);
+                }
+            }
+        };
+
+        ws.onerror = function(event) {
+            console.error("WebSocket error observed:", event);
+        };
+
+        //Process & PLAY AUDIO
+        function processMessage(data) {
+            console.log("Processed data:", data);
+            if (data.command === "start20SecCountdown") {
+                console.log("Starting 20-second countdown sound.");
+                countdownAudio.play().catch(error => {
+                    console.error("Error playing countdown audio:", error);
+                });
+            }
+            if (data.command === "endgameHorn") {
+                console.log("Playing endgame sound.");
+                endgameAudio.play().catch(error => {
+                    console.error("Error playing endgame audio:", error);
+                });
+            }
+        }
+
+        
+        playButton.addEventListener('click', function() {
+            countdownAudio.play().then(() => {
+                countdownAudio.pause();  // Pause immediately to allow future plays
+                countdownAudio.currentTime = 0;
+                endgameAudio.play().then(() => {
+                    endgameAudio.pause();  // Pause immediately to allow future plays
+                    endgameAudio.currentTime = 0;
+                    playButton.disabled = true;
+                    console.log('Audio enabled by user interaction.');
+                }).catch(error => {
+                    console.error("Error enabling endgame audio:", error);
+                });
+            }).catch(error => {
+                console.error("Error enabling countdown audio:", error);
+            });
+        });
+    </script>
+</body>
+</html>
